@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyAnimeListClient", "MyAnimeListClient\MyAnimeListClient.csproj", "{3D576B5E-135E-415A-AB92-805834082E5E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShikimoriClient", "ShikimoriClient\ShikimoriClient.csproj", "{68B536AF-6511-4CBC-8934-42954F4CF1B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{805FC175-08D2-4488-9C55-7B216C981705}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShikiMALSynchronizer", "ShikiMALSynchronizer\ShikiMALSynchronizer.csproj", "{484F6A37-7624-4AF5-A1D2-C8B7AD81C450}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D576B5E-135E-415A-AB92-805834082E5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D576B5E-135E-415A-AB92-805834082E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D576B5E-135E-415A-AB92-805834082E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D576B5E-135E-415A-AB92-805834082E5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68B536AF-6511-4CBC-8934-42954F4CF1B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68B536AF-6511-4CBC-8934-42954F4CF1B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68B536AF-6511-4CBC-8934-42954F4CF1B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68B536AF-6511-4CBC-8934-42954F4CF1B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805FC175-08D2-4488-9C55-7B216C981705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805FC175-08D2-4488-9C55-7B216C981705}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805FC175-08D2-4488-9C55-7B216C981705}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805FC175-08D2-4488-9C55-7B216C981705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{484F6A37-7624-4AF5-A1D2-C8B7AD81C450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{484F6A37-7624-4AF5-A1D2-C8B7AD81C450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{484F6A37-7624-4AF5-A1D2-C8B7AD81C450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{484F6A37-7624-4AF5-A1D2-C8B7AD81C450}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32D2D072-2941-4E84-87D0-A710931D76A3}
+	EndGlobalSection
+EndGlobal
