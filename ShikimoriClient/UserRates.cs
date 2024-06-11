@@ -18,9 +18,9 @@ public class UserRates : GraphQLClientWrapper
         // Shikimori отдаёт максимум по 50 записей, поэтому будем листать странички, пока не соберём все нужные данные
         while (true)
         {
-            var response = await GetAsync<UserRatesData>(
+            var response = await Common.WaitASec.RunAsync(async () => await GetAsync<UserRatesData>(
                 $"{{ userRates(page: {page++}, limit: 50, targetType: Anime) " +
-                $"{{ id anime {{ id name russian malId }} episodes status score }} }}");
+                $"{{ id anime {{ id name russian malId }} episodes status score }} }}"));
 
             if (response.UserRates is { Count : 0 })
             {

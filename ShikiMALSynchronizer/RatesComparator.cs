@@ -22,7 +22,12 @@ internal class RatesComparator
                 .ToList(),
             RatesToPatch = malIdToShikiRate
                 .Where(x => malRatesById.ContainsKey(x.Key))
-                .Where(x => x.Value.Episodes != malRatesById[x.Key].ListStatus.NumEpisodesWatched)
+                .Where(x =>
+                    {
+                        var malRate = malRatesById[x.Key].ListStatus;
+                        return x.Value.Episodes != malRate.NumEpisodesWatched
+                            || int.Parse(x.Value.Score) != malRate.Score;
+                    })
                 .Select(x => x.Value)
                 .ToList()
         };

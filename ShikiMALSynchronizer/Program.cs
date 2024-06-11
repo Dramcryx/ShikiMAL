@@ -27,20 +27,12 @@ Console.WriteLine("Animes to patch in MAL:\n" + string.Join('\n', comparison.Rat
 
 foreach (var toAdd in comparison.RatesToAdd)
 {
-    int ticks = Environment.TickCount;
-    await MALClient.AnimeApi.PutAnimeAsync(toAdd.ToPatchRequest());
-    int ticksToDelay = 1000 - (Environment.TickCount - ticks);
-    if (ticksToDelay > 0)
-        await Task.Delay(ticksToDelay);
+    await Common.WaitASec.RunAsync(async () => await MALClient.AnimeApi.PutAnimeAsync(toAdd.ToPatchRequest()), 1500);
 }
 
 foreach (var toPatch in comparison.RatesToPatch)
 {
-    int ticks = Environment.TickCount;
-    await MALClient.AnimeApi.PutAnimeAsync(toPatch.ToPatchRequest());
-    int ticksToDelay = 1000 - (Environment.TickCount - ticks);
-    if (ticksToDelay > 0)
-        await Task.Delay(ticksToDelay);
+    await Common.WaitASec.RunAsync(async () => await MALClient.AnimeApi.PutAnimeAsync(toPatch.ToPatchRequest()), 1500);
 }
 
 Console.WriteLine("Done");
