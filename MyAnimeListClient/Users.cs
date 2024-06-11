@@ -1,18 +1,21 @@
 ﻿namespace MyAnimeListClient;
 
-public class User : Common.ApiBase<Token>
+/// <summary>
+/// API для эндпоинта /v2/users на MyAnimeList
+/// </summary>
+public class Users : Common.ApiBase<Token>
 {
-    string userName;
+    private readonly string userName;
 
-    public User(Token token, string userName) :
+    public Users(Token token, string userName) :
         base("https://api.myanimelist.net/v2/users", token)
     {
         this.userName = userName;
     }
 
-    public static User Me(Token token)
+    public static Users Me(Token token)
     {
-        return new User(token, "@me");
+        return new Users(token, "@me");
     }
 
     public async Task<UserGetAnimeListResponse> GetAnimeListAsync()

@@ -4,14 +4,14 @@ internal class RatesComparator
 {
     internal class ComparisonResult
     {
-        public List<ShikimoriRateWithAnime> RatesToAdd { get; set; }
+        public List<ShikimoriClient.UserRate> RatesToAdd { get; set; }
 
-        public List<ShikimoriRateWithAnime> RatesToPatch { get; set; }
+        public List<ShikimoriClient.UserRate> RatesToPatch { get; set; }
     }
 
-    public static ComparisonResult Compare(List<ShikimoriRateWithAnime> shikiRates, List<MyAnimeListClient.UserAnimeListEdge> malRates)
+    public static ComparisonResult Compare(List<ShikimoriClient.UserRate> shikiRates, List<MyAnimeListClient.UserAnimeListEdge> malRates)
     {
-        var malIdToShikiRate = shikiRates.ToDictionary(x => x.Anime.MyAnimeListId);
+        var malIdToShikiRate = shikiRates.ToDictionary(x => x.Anime.MalId);
         var malRatesById = malRates.ToDictionary(x => x.Node.Id);
 
         return new()
@@ -22,7 +22,7 @@ internal class RatesComparator
                 .ToList(),
             RatesToPatch = malIdToShikiRate
                 .Where(x => malRatesById.ContainsKey(x.Key))
-                .Where(x => x.Value.UserRate.Episodes != malRatesById[x.Key].ListStatus.NumEpisodesWatched)
+                .Where(x => x.Value.Episodes != malRatesById[x.Key].ListStatus.NumEpisodesWatched)
                 .Select(x => x.Value)
                 .ToList()
         };

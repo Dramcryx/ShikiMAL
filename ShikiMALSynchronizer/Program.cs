@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Metrics;
-using MALShiki;
+﻿using MALShiki;
 
 Console.WriteLine("Hello, World!");
 
@@ -10,7 +9,7 @@ var MALClient = await MyAnimeListClient.Client.AuthorizeAsync(
         ClientSecret = Environment.GetEnvironmentVariable("MAL_CLIENT_SECRET")
     });
 
-var MALList = await MALClient.UserApi.GetAnimeListAsync();
+var MALRates = (await MALClient.UsersApi.GetAnimeListAsync()).Data;
 
 var ShikiClient = await ShikimoriClient.Client.AuthorizeAsync(
     new Common.AppIdentifier()
@@ -19,15 +18,9 @@ var ShikiClient = await ShikimoriClient.Client.AuthorizeAsync(
         ClientSecret = Environment.GetEnvironmentVariable("SHIKI_CLIENT_SECRET")
     });
 
-var ShikiRates = await ShikiClient.UserApi.GetAnimeRatesAsync();
-var ShikiList = await ShikiClient.AnimesApi.GetAnimesAsync(
-    ShikiRates
-    .Where(x => x.TargetType == "Anime" && x.GetStatus() == ShikimoriClient.AnimeStatus.Planned)
-    .Select(x => x.TargetId));
+var ShikiRates = await ShikiClient.UserRatesApi.GetUserRatesAsync();
 
-var ShikiZip = ShikimoriRateWithAnime.Zip(ShikiList, ShikiRates);
-
-var comparison = RatesComparator.Compare(ShikiZip, MALList.Data);
+var comparison = RatesComparator.Compare(ShikiRates, MALRates);
 
 Console.WriteLine("Animes to add in MAL:\n" + string.Join('\n', comparison.RatesToAdd.Select(x => x.Anime.Name)));
 Console.WriteLine("Animes to patch in MAL:\n" + string.Join('\n', comparison.RatesToPatch.Select(x => x.Anime.Name)));

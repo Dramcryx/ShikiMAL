@@ -4,11 +4,14 @@ using System.Text.Json;
 
 namespace MyAnimeListClient;
 
+/// <summary>
+/// Основной класс для работы с MyAnimeList. Оборачивает авторизацию и создаёт нужные клиенты к API.
+/// </summary>
 public class Client
 {
-    Token token;
+    private Token token;
 
-    public User UserApi { get; private set; }
+    public Users UsersApi { get; private set; }
 
     public Anime AnimeApi { get; private set; }
 
@@ -24,7 +27,7 @@ public class Client
 
         result.token = await RequestTokenAsync(malAppId, await codeListenerTask, challenge);
 
-        result.UserApi = User.Me(result.token);
+        result.UsersApi = Users.Me(result.token);
         result.AnimeApi = new Anime(result.token);
 
         return result;
@@ -54,7 +57,6 @@ public class Client
         var httpClient = new HttpClient();
 
         var req = new HttpRequestMessage(HttpMethod.Post, "https://myanimelist.net/v1/oauth2/token");
-        // This is the important part:
         req.Content = new FormUrlEncodedContent(new Dictionary<string, string>
             {
                 { "client_id", appId.ClientId },
@@ -65,7 +67,6 @@ public class Client
             });
 
         HttpResponseMessage resp = await httpClient.SendAsync(req);
-
         var responseString = await resp.Content.ReadAsStringAsync();
 
         return JsonSerializer.Deserialize<Token>(responseString);

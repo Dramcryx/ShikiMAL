@@ -1,8 +1,11 @@
 ﻿namespace MALShiki;
 
+/// <summary>
+/// Расширения для типов списка аниме
+/// </summary>
 public static class AnimeExtensions
 {
-    static readonly Dictionary<string, ShikimoriClient.AnimeStatus> stringToShikimoriStatus = new()
+    private static readonly Dictionary<string, ShikimoriClient.AnimeStatus> stringToShikimoriStatus = new()
     {
         { "planned", ShikimoriClient.AnimeStatus.Planned },
         { "watching", ShikimoriClient.AnimeStatus.Watching },
@@ -12,7 +15,7 @@ public static class AnimeExtensions
         { "dropped", ShikimoriClient.AnimeStatus.Dropped }
     };
 
-    static readonly Dictionary<string, MyAnimeListClient.AnimeStatus> stringToMALStatus = new()
+    private static readonly Dictionary<string, MyAnimeListClient.AnimeStatus> stringToMALStatus = new()
     {
         { "plan_to_watch", MyAnimeListClient.AnimeStatus.PlanToWatch },
         { "watching", MyAnimeListClient.AnimeStatus.Watching },
@@ -41,15 +44,15 @@ public static class AnimeExtensions
         return stringToMALStatus[edge.ListStatus.Status];
     }
 
-    public static MyAnimeListClient.PutAnimeRequest ToPatchRequest(this ShikimoriRateWithAnime shiki)
+    public static MyAnimeListClient.PutAnimeRequest ToPatchRequest(this ShikimoriClient.UserRate shiki)
     {
         MyAnimeListClient.PutAnimeRequest result = new();
 
         result.AnimeId = shiki.Anime.Id;
-        result.Status = shiki.UserRate.GetStatus().ToMyAnimeListStatus();
-        result.NumWatchedEpisodes = shiki.UserRate.Episodes;
-        result.IsRewatching = shiki.UserRate.GetStatus() == ShikimoriClient.AnimeStatus.Rewatching;
-        result.Score = shiki.UserRate.Score;
+        result.Status = shiki.GetStatus().ToMyAnimeListStatus();
+        result.NumWatchedEpisodes = shiki.Episodes;
+        result.IsRewatching = shiki.GetStatus() == ShikimoriClient.AnimeStatus.Rewatching;
+        result.Score = int.Parse(shiki.Score);
 
         return result;
     }

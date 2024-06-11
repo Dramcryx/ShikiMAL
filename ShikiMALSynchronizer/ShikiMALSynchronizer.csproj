@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove=".gitignore" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MyAnimeListClient\MyAnimeListClient.csproj" />
     <ProjectReference Include="..\ShikimoriClient\ShikimoriClient.csproj" />
   </ItemGroup>

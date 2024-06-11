@@ -2,6 +2,10 @@
 
 namespace Common;
 
+/// <summary>
+/// Основа REST API, обобщающая формирование запросов и чтение ответов
+/// </summary>
+/// <typeparam name="TokenT">Тип конкретизированного токена</typeparam>
 public class ApiBase<TokenT> where TokenT : TokenBase
 {
     private HttpClient httpClient = new();

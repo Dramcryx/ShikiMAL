@@ -2,7 +2,14 @@
 
 namespace Common;
 
+/// <summary>
+/// Общий токен для шаблона клиента
+/// </summary>
 public class TokenBase
 {
-    [JsonPropertyName("access_token")] public string AccessToken { get; set; }
+    /// <summary>
+    /// Нужный нам токен содержит хотя бы access_token
+    /// </summary>
+    [JsonPropertyName("access_token")]
+    public string AccessToken { get; set; }
 }

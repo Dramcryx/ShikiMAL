@@ -4,14 +4,14 @@ using System.Text;
 namespace MyAnimeListClient;
 
 /// <summary>
-/// Provides a randomly generating PKCE code verifier and it's corresponding code challenge.
+/// Генератор PKCE для авторизации в MyAniemList
 /// </summary>
 static class Pkce
 {
     /// <summary>
-    /// Generates a code_verifier and the corresponding code_challenge, as specified in the rfc-7636.
+    /// Генерирует code_verifier и соответствующий code_challenge согласно RFC-7636.
     /// </summary>
-    /// <remarks>See https://datatracker.ietf.org/doc/html/rfc7636#section-4.1 and https://datatracker.ietf.org/doc/html/rfc7636#section-4.2</remarks>
+    /// <remarks>См. https://datatracker.ietf.org/doc/html/rfc7636#section-4.1 и https://datatracker.ietf.org/doc/html/rfc7636#section-4.2</remarks>
     public static (string code_challenge, string verifier) Generate(int size = 32)
     {
         using var rng = RandomNumberGenerator.Create();

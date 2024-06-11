@@ -2,8 +2,16 @@
 
 namespace Common;
 
-public abstract class AuthCodeListener
+/// <summary>
+/// Слушатель коллбэка от API при получении Authentication code
+/// </summary>
+public class AuthCodeListener
 {
+    /// <summary>
+    /// Прослушать по <paramref name="listenerUrl"/> коллбэк от сервера
+    /// </summary>
+    /// <param name="listenerUrl">Эндпоинт для прослушивания</param>
+    /// <returns>Аутентификационный код для получения токена</returns>
     public static Task<string> ListenAuthCodeAsync(string listenerUrl)
     {
         return Task.Run(() => Listen(listenerUrl));
@@ -21,7 +29,6 @@ public abstract class AuthCodeListener
         var queryDictionary = System.Web.HttpUtility.ParseQueryString(request.Url.Query);
         var authCode = queryDictionary["code"];
 
-        // Obtain a response object.
         HttpListenerResponse response = context.Response;
 
         context.Response.Headers.Clear();

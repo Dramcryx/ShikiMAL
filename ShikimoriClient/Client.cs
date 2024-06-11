@@ -4,13 +4,14 @@ using System.Text.Json;
 
 namespace ShikimoriClient;
 
+/// <summary>
+/// Основной класс для работы с Shikimori. Оборачивает авторизацию и создаёт нужные клиенты к API.
+/// </summary>
 public class Client
 {
-    Token token;
+    private Token token;
 
-    public UserRates UserApi { get; private set; }
-
-    public Animes AnimesApi { get; private set; }
+    public UserRates UserRatesApi { get; private set; }
 
     public static async Task<Client> AuthorizeAsync(Common.AppIdentifier shikiAppId)
     {
@@ -22,8 +23,7 @@ public class Client
 
         result.token = await RequestTokenAsync(shikiAppId, await codeListenerTask);
 
-        result.UserApi = await UserRates.MeAsync(result.token);
-        result.AnimesApi = new Animes(result.token);
+        result.UserRatesApi = new UserRates(result.token);
 
         return result;
     }
