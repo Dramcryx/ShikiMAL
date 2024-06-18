@@ -1,22 +1,9 @@
-﻿using System.Diagnostics;
-using ShikiMALSynchronizer;
+﻿using ShikiMALSynchronizer;
+using ShikiMALSynchronizer.Cli;
 
 public static partial class Program
 {
-    class BrowserOpener : Common.IBrowserOpener
-    {
-        public void OpenBrowser(string url)
-        {
-            var p = new Process();
-            p.StartInfo = new ProcessStartInfo(url)
-            {
-                UseShellExecute = true
-            };
-            p.Start();
-        }
-    }
-
-    public static async Task Main(string[] args)
+    public static async Task Main()
     {
         var MALClient = await MyAnimeListClient.Client.AuthorizeAsync(
             new BrowserOpener(),
