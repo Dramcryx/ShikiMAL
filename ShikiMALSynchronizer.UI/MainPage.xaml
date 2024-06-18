@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShikiMALSynchronizer.UI.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="25">
+            <VerticalStackLayout
+                Padding="30,0"
+                Spacing="25">
+                <Label Text="MyAnimeList credentials" FontSize="Medium"/>
+                <Grid RowSpacing="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Text="Client ID" VerticalTextAlignment="Center"/>
+                    <Entry Grid.Column="1" Grid.Row="0" x:Name="MAL_CLIENT_ID"/>
+                    <Label Grid.Column="0" Grid.Row="1" Text="Client Secret" VerticalTextAlignment="Center"/>
+                    <Entry Grid.Column="1" Grid.Row="1" x:Name="MAL_CLIENT_SECRET"/>
+                </Grid>
+                <Label Text="Shikimori credentials" FontSize="Medium"/>
+                <Grid RowSpacing="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Text="Client ID" VerticalTextAlignment="Center"/>
+                    <Entry Grid.Column="1" Grid.Row="0" x:Name="SHIKI_CLIENT_ID"/>
+                    <Label Grid.Column="0" Grid.Row="1" Text="Client Secret" VerticalTextAlignment="Center"/>
+                    <Entry Grid.Column="1" Grid.Row="1" x:Name="SHIKI_CLIENT_SECRET"/>
+                </Grid>
+                <Button Text="Continue" HorizontalOptions="Center" VerticalOptions="Center" Clicked="OnContinue"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

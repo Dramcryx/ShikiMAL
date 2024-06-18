@@ -1,8 +1,8 @@
-﻿namespace MALShiki;
+﻿namespace ShikiMALSynchronizer;
 
-internal class RatesComparator
+public class RatesComparator
 {
-    internal class ComparisonResult
+    public class ComparisonResult
     {
         public List<ShikimoriClient.UserRate> RatesToAdd { get; set; }
 

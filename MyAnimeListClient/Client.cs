@@ -1,5 +1,4 @@
 ﻿using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Text.Json;
 
 namespace MyAnimeListClient;
@@ -15,7 +14,10 @@ public class Client
 
     public Anime AnimeApi { get; private set; }
 
-    public static async Task<Client> AuthorizeAsync(Common.AppIdentifier malAppId)
+    public static async Task<Client> AuthorizeAsync(
+        Common.IBrowserOpener browserOpener,
+        Common.AppIdentifier malAppId,
+        Common.ICredentialsSaver? saver = null)
     {
         var result = new Client();
 
@@ -23,9 +25,22 @@ public class Client
 
         var (challenge, verifier) = Pkce.Generate();
 
-        StartBrowser(malAppId.ClientId, challenge);
+        browserOpener.OpenBrowser(CreateAuthenticationUrl(malAppId.ClientId, challenge));
 
         result.token = await RequestTokenAsync(malAppId, await codeListenerTask, challenge);
+
+        if (saver != null)
+        {
+            await saver.SaveCredentialsAsync(
+                Common.ICredentialsSaver.MALCredentialsId,
+                new Common.ICredentialsSaver.AppCredentials()
+                {
+                    AccessToken = result.token.AccessToken,
+                    RefreshToken = result.token.RefreshToken,
+                    ClientId = malAppId.ClientId,
+                    ClientSecret = malAppId.ClientSecret
+                });
+        }
 
         result.UsersApi = Users.Me(result.token);
         result.AnimeApi = new Anime(result.token);
@@ -33,7 +48,7 @@ public class Client
         return result;
     }
 
-    private static void StartBrowser(string clientId, string challenge)
+    private static string CreateAuthenticationUrl(string clientId, string challenge)
     {
         NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
 
@@ -44,12 +59,7 @@ public class Client
         queryString.Add("code_challenge", challenge);
         queryString.Add("code_challenge_method", "plain");
 
-        var p = new Process();
-        p.StartInfo = new ProcessStartInfo($"https://myanimelist.net/v1/oauth2/authorize?{queryString.ToString()}")
-        {
-            UseShellExecute = true
-        };
-        p.Start();
+        return $"https://myanimelist.net/v1/oauth2/authorize?{queryString.ToString()}";
     }
 
     private static async Task<Token> RequestTokenAsync(Common.AppIdentifier appId, string code, string verifier)

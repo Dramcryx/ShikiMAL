@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShikiMALSynchronizer", "ShikiMALSynchronizer\ShikiMALSynchronizer.csproj", "{484F6A37-7624-4AF5-A1D2-C8B7AD81C450}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShikiMALSynchronizer.Cli", "ShikiMALSynchronizer.Cli\ShikiMALSynchronizer.Cli.csproj", "{0DB0ABCF-0C12-41BE-9DF6-C4B43CB41323}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShikiMALSynchronizer.UI", "ShikiMALSynchronizer.UI\ShikiMALSynchronizer.UI.csproj", "{9CC0AA0A-C75D-4574-A8D1-5EB460FCDAFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,16 @@ Global
 		{484F6A37-7624-4AF5-A1D2-C8B7AD81C450}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{484F6A37-7624-4AF5-A1D2-C8B7AD81C450}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{484F6A37-7624-4AF5-A1D2-C8B7AD81C450}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DB0ABCF-0C12-41BE-9DF6-C4B43CB41323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DB0ABCF-0C12-41BE-9DF6-C4B43CB41323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DB0ABCF-0C12-41BE-9DF6-C4B43CB41323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DB0ABCF-0C12-41BE-9DF6-C4B43CB41323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC0AA0A-C75D-4574-A8D1-5EB460FCDAFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC0AA0A-C75D-4574-A8D1-5EB460FCDAFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC0AA0A-C75D-4574-A8D1-5EB460FCDAFE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9CC0AA0A-C75D-4574-A8D1-5EB460FCDAFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC0AA0A-C75D-4574-A8D1-5EB460FCDAFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC0AA0A-C75D-4574-A8D1-5EB460FCDAFE}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

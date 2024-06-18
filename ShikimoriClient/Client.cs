@@ -1,5 +1,4 @@
 ﻿using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Text.Json;
 
 namespace ShikimoriClient;
@@ -13,22 +12,38 @@ public class Client
 
     public UserRates UserRatesApi { get; private set; }
 
-    public static async Task<Client> AuthorizeAsync(Common.AppIdentifier shikiAppId)
+    public static async Task<Client> AuthorizeAsync(
+        Common.IBrowserOpener browserOpener,
+        Common.AppIdentifier shikiAppId,
+        Common.ICredentialsSaver? saver = null)
     {
         var result = new Client();
 
         var codeListenerTask = Common.AuthCodeListener.ListenAuthCodeAsync("http://localhost:5051/oauth/shikimori/");
 
-        StartBrowser(shikiAppId.ClientId);
+        browserOpener.OpenBrowser(CreateAuthenticationUrl(shikiAppId.ClientId));
 
         result.token = await RequestTokenAsync(shikiAppId, await codeListenerTask);
+
+        if (saver != null)
+        {
+            await saver.SaveCredentialsAsync(
+                Common.ICredentialsSaver.ShikiCredentialsId,
+                new Common.ICredentialsSaver.AppCredentials()
+                {
+                    AccessToken = result.token.AccessToken,
+                    RefreshToken = result.token.RefreshToken,
+                    ClientId = shikiAppId.ClientId,
+                    ClientSecret = shikiAppId.ClientSecret
+                });
+        }
 
         result.UserRatesApi = new UserRates(result.token);
 
         return result;
     }
 
-    private static void StartBrowser(string clientId)
+    private static string CreateAuthenticationUrl(string clientId)
     {
         NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
 
@@ -37,12 +52,7 @@ public class Client
         queryString.Add("response_type", "code");
         queryString.Add("scope", "user_rates");
 
-        var p = new Process();
-        p.StartInfo = new ProcessStartInfo($"https://shikimori.one/oauth/authorize?{queryString.ToString()}")
-        {
-            UseShellExecute = true
-        };
-        p.Start();
+        return $"https://shikimori.one/oauth/authorize?{queryString.ToString()}";
     }
 
     private static async Task<Token> RequestTokenAsync(Common.AppIdentifier appId, string code)

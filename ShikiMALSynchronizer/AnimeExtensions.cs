@@ -1,4 +1,4 @@
-﻿namespace MALShiki;
+﻿namespace ShikiMALSynchronizer;
 
 /// <summary>
 /// Расширения для типов списка аниме

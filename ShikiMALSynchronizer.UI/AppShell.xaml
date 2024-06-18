@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ShikiMALSynchronizer.UI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ShikiMALSynchronizer.UI"
+    Shell.FlyoutBehavior="Disabled"
+    Title="ShikiMALSynchronizer.UI">
+
+    <ShellContent
+        Title="ShikiMAL Synchronizer"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+</Shell>
